@@ -13,6 +13,7 @@ public class Principal implements DrawListener {
     private final int dimensao;
     private Circulo circulo;
     private Draw draw;
+    private boolean teclaPressionada;
 
     public Principal(int dimensao) {
         // Criando um círculo na coordenada (0,0)
@@ -24,6 +25,9 @@ public class Principal implements DrawListener {
         // objeto que ficará ouvindo por eventos do mouse ou teclado
         draw.addListener(this);
 
+        // Para saber quando uma tecla não está mais pressionada
+        teclaPressionada = false;
+
         // Indicando o número de casas da área de desenho
         this.dimensao = dimensao;
         draw.setXscale(0, dimensao);
@@ -31,7 +35,7 @@ public class Principal implements DrawListener {
         draw.enableDoubleBuffering();
 
         // Desenhando os objetos na tela
-        desenharTela();
+        desenharTela();        
     }
 
     /**
@@ -57,6 +61,8 @@ public class Principal implements DrawListener {
         draw.clear(Color.LIGHT_GRAY);
         this.desenharTabuleiro();
         this.desenharCirculos();
+        draw.setPenColor(Color.BLACK);
+        draw.text(4.5, .5, "Pressione a tecla 's' e veja o terminal");
         draw.show();
     }
 
@@ -78,11 +84,22 @@ public class Principal implements DrawListener {
         desenharTela();
     }
 
+    @Override
+    public void keyTyped(char c) {
+        if ((c == 's') && (!teclaPressionada)){
+            System.out.println("apertou a tecla s");
+            teclaPressionada = true;
+        }
+    }
+    @Override
+    public void keyReleased(int i) {
+        teclaPressionada = false;
+    }
+
 
     public static void main(String[] args) {
         Principal p = new Principal(8);
     }
-
 
     // Métodos da interface DrawListener que não serão usados neste exemplo
     @Override
@@ -90,11 +107,7 @@ public class Principal implements DrawListener {
     @Override
     public void mouseReleased(double v, double v1) {}
     @Override
-    public void mouseClicked(double v, double v1) {}
-    @Override
-    public void keyTyped(char c) {}
+    public void mouseClicked(double v, double v1) {}    
     @Override
     public void keyPressed(int i) {}
-    @Override
-    public void keyReleased(int i) {}
 }

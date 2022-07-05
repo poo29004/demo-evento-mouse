@@ -19,6 +19,8 @@ public class Circulo {
         Color cor = (selecionado) ? Color.RED : Color.BLUE;
         desenho.setPenColor(cor);
         desenho.filledCircle(x + 0.5, y + 0.5, .375);
+        // caso queira desenhar uma imagem
+        // desenho.picture(x + 0.5, y + 0.5, "duke.png");
     }
 
     public boolean isSelecionado() {
