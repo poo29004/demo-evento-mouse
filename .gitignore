@@ -222,4 +222,4 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle,macos,linux,windows
 
 # Não ignore os arquivos JAR contidos dentro do diretório lib
-!libs/*.jar
+!**/app/libs/*.jar
